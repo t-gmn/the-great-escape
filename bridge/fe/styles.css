@@ -1,0 +1,15 @@
+.warn {
+    background-color: red;
+    color: white;
+    font-size: 115%;
+}
+span {
+    background-color: white;
+}
+body {
+    background-image: url('starry-sky.png');
+}
+h2 {
+    color: white;
+    font-size: 250%;
+}

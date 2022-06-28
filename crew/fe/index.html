@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Crew room</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<h2>Crew room</h2>
+<img src="crew.png" alt="Navigation room" usemap="#crew-room-map"/>
+<p><a href="http://localhost:9680">Back to the bridge</a></p>
+<map name="crew-room-map">
+    <area shape="rect" coords="144,403,179,433" alt="note" href="note1.html">
+    <area shape="rect" coords="171,462,201,480" alt="note" href="note2.html">
+    <area shape="poly" coords="252,569, 347,513, 347,539, 253,595" alt="top drawer" href="#" onclick="drawerClick('top')">
+    <area shape="poly" coords="255,600, 253,623, 340,564, 346,545" alt="middle drawer" href="#" onclick="drawerClick('middle')">
+    <area shape="poly" coords="252,625, 339,571, 330,607, 252,655" alt="bottom drawer" href="#" onclick="bottomDrawerClick()">
+</map>
+<script>
+    function drawerClick(position) {
+        alert(`You clicked the ${position} drawer! But you can't open it because it is locked.`)
+    }
+    function bottomDrawerClick() {
+        alert(`You clicked the bottom drawer! There's a pair of *long nose pliers* in it.`)
+    }
+</script>
+</body>
+</html>

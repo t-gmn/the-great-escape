@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navigation room</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<h2>Navigation Room</h2>
+<p style="display:none" id="loading"><span>Fetching data from database...</span></p>
+<img src="navigation.png" alt="Navigation room" usemap="#nav-room-map"/>
+<p><a href="http://localhost:9680">Back to the bridge</a></p>
+<map name="nav-room-map">
+    <area
+            shape="rect"
+            coords="538,285,650,440"
+            alt="Database"
+            href="#"
+            onClick="dbClick()"
+    />
+</map>
+<script>
+      function dbClick() {
+        let name = prompt("Please enter a space object name:");
+        document.getElementById('loading').style["display"] = "block";
+        fetch(
+          `http://localhost:9899/spaceobjects/search/findByName?name=${name}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            data = data._embedded.spaceobjects[0];
+            alert(`Name: ${data.name}\n Code: ${data.code}`);
+          })
+          .catch((error) => {
+            alert("Fetching the data from database failed!");
+           })
+           .finally(() => {document.getElementById('loading').style["display"] = "none";});
+      }
+
+</script>
+</body>
+</html>

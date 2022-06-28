@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Bridge</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h2>Bridge</h2>
+<p><span class="warn"><strong>!!! This space station will explode at 16:45 !!!</strong></span></p>
+<p><span>
+    You're trapped in an abandoned space station that's about to explode.
+    Examine the different rooms to find the secret code for opening the exit of this space station to successfully
+    escape before everything is blown to pieces.<br>
+    First, you should try to get the engine running again.
+    </span>
+</p>
+<img src="bridge.png" alt="Bridge" usemap="#bridge-map"/>
+<map name="bridge-map">
+    <area shape="poly" coords="579,348,632,365,635,463,575,496," alt="engine room door" href="http://localhost:9780">
+    <area shape="poly" coords="816,455,916,516,635,916,620,803,703,629,703,526" alt="engine room"
+          href="http://localhost:9780">
+    <area shape="poly" coords="610,337,619,203, 674,224, 670,369" alt="navigation room door"
+          href="http://localhost:9880">
+    <area shape="poly" coords="809,169,925,105, 1043,171, 1046,284,931,357,812,289" alt="navigation room"
+          href="http://localhost:9880">
+    <area shape="poly" coords="443,365,503,380,502,524,436,484" alt="crew room door" href="http://localhost:9980">
+    <area shape="poly" coords="221,561,329,500,453,574,454,679,346,743,222,671" alt="crew room"
+          href="http://localhost:9980">
+    <area shape="poly" coords="361,219,476,179, 486,229, 517,213, 520,239, 490,255, 486,323, 359,396" alt="exit"
+          href="#" onClick="exitClick()">
+</map>
+<script>
+function exitClick() {
+    let code = prompt("Enter the 5-digit exit code to escape the space station:");
+    if(code != null) {
+        fetch(`http://localhost:9699/exit/${code}`).then((response) => {
+                if(response.status === 200){
+                    alert("Success! You made it out alive! " + String.fromCodePoint(0x1F973) + String.fromCodePoint(0x1F680) + String.fromCodePoint(0x1F3C6));
+                } else {
+                    alert("Wrong code! Try to find the correct code. Hurry, time is running out!");
+                }
+            }).catch((error) => {
+                alert("Could not connect to bridge service")
+            })
+    }
+}
+
+
+</script>
+</body>
+</html>

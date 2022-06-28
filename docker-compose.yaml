@@ -1,0 +1,81 @@
+version: "3.1"
+
+services:
+  # Start here (http://localhost:9680)
+  bridge-fe:
+    build: "./bridge/fe"
+    ports:
+      - 9680:80
+
+  bridge-service:
+    build: ./bridge/service
+    # TODO 1
+
+  engine-fe:
+    build: "./engine/fe"
+    ports:
+      - 9780:80
+
+  engine-service:
+    build: "./engine/service"
+    ports:
+      - 9799:9799
+    healthcheck:
+      # TODO 2
+      test: [ "CMD", "curl", "--fail", "localhost:9799/ENDPOINTHERE" ]
+      interval: 5s
+      timeout: 10s
+      retries: 4
+
+  navigation-frontend:
+    build: ./navigation/fe
+    ports:
+      - 9880:80
+    depends_on:
+      engine-service:
+        condition: service_healthy
+
+  navigation-service:
+    build: ./navigation/service
+    environment:
+      MYSQL_HOST: space-db-service
+    ports:
+      - 9899:9899
+    depends_on:
+      space-db-service:
+        condition: service_healthy
+      engine-service:
+        condition: service_healthy
+
+  space-db-service:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: spacedb
+      MYSQL_USER: user
+      # TODO 3
+      # MYSQL_PASSWORD: PASSWORDHERE
+    volumes:
+      - ./navigation/db:/docker-entrypoint-initdb.d
+    depends_on:
+      engine-service:
+        condition: service_healthy
+    healthcheck:
+      test:
+        # TODO 4
+        ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "user"] #,  "-pPASSWORDHERE"]
+      interval: 5s
+      timeout: 10s
+      retries: 4
+
+  crew-fe:
+    build: "./crew/fe"
+    ports:
+      - 9980:80
+    depends_on:
+      engine-service:
+        condition: service_healthy

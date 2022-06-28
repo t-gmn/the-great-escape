@@ -1,0 +1,14 @@
+span {
+    background-color: white;
+}
+body {
+    background-image: url('starry-sky.png');
+}
+h2 {
+    color: white;
+    font-size: 250%;
+}
+a {
+    color: white;
+    font-size: 125;
+}

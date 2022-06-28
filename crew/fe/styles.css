@@ -1,0 +1,36 @@
+span {
+    background-color: white;
+}
+body {
+    background-image: url('starry-sky.png');
+}
+h2 {
+    color: white;
+    font-size: 250%;
+}
+a {
+    color: white;
+    font-size: 125;
+}
+img {
+    color: white;
+    font-size: 125%;
+}
+#note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('note1.png');
+    width: 700px;
+    height: 700px;
+    background-size: 100% 100%;
+    font-size: 125%;
+}
+#part1 {
+  position: absolute;
+}
+
+#part2 {
+  position: absolute;
+}

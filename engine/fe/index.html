@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Engine room</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<h2>Engine Room</h2>
+<p><span>The engine-service only works if the cables are in the correct order. For details click on the cables.</span></p>
+<img src="engineroom.png" alt="Engine room" usemap="#engine-room-map">
+<p><a href="http://localhost:9680">Back to the bridge</a></p>
+<map name="engine-room-map">
+    <area shape="rect" coords="539,346,573,451" alt="Pipes" href="#" onClick="pipesClick()">
+    <area shape="poly" coords="171,706, 226,632, 306,701, 349,715, 353,760, 296,759, 276,739, 214,739, 172,707, 171,706"
+          alt="Cables" href="cables.html">
+</map>
+<script>
+function pipesClick() {
+  let toolName = prompt("Something seems to be stuck behind the pipe. If you have a tool to try to reach it, please enter the tool's name:");
+  location.href=`http://localhost:9799/trywith${toolName.replace(/\s|-/g,'').toLowerCase()}`;
+}
+
+</script>
+</body>
+</html>
