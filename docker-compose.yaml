@@ -73,7 +73,9 @@ services:
       retries: 4
 
   crew-fe:
-    build: "./crew/fe"
+    image: nginx
+    volumes:
+      - ./crew/fe:/usr/share/nginx/html/
     ports:
       - 9980:80
     depends_on:
